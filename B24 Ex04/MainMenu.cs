@@ -11,7 +11,7 @@ namespace Ex04.Menus.Interfaces
     public class MainMenu
     {
         private readonly MenuItem r_MenuItem;
-        private const int k_InvalidChoice = -1;
+        //private const int k_InvalidChoice = -1;
         private List<MenuItem> m_MenuItemsList = new List<MenuItem>();
 
         public MainMenu(string i_Title)
@@ -35,14 +35,11 @@ namespace Ex04.Menus.Interfaces
             {
                 Console.Clear();
                 Console.WriteLine("Main Menus:");
-                for (int i = 0; i < m_MenuItemsList.Count; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {m_MenuItemsList[i].Title}");
-                }
+               
 
                 Console.WriteLine("0. Exit"); //console?
 
-                int choice = GetUserChoice();
+                //int choice = GetUserChoice();
 
                 if (choice == 0)
                 {
@@ -55,22 +52,22 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
-        private int GetUserChoice()
-        {
-            int choice = k_InvalidChoice;
-            bool isValidChoice = false;
+        //private int GetUserChoice()
+        //{
+        //    int choice = k_InvalidChoice;
+        //    bool isValidChoice = false;
 
-            while (!isValidChoice)
-            {
-                isValidChoice = int.TryParse(Console.ReadLine(), out choice); //function for valid input
-                if (!isValidChoice)
-                {
-                    Console.WriteLine("Invalid choice, please try again."); //console?
-                }
-            }
+        //    while (!isValidChoice)
+        //    {
+        //        isValidChoice = int.TryParse(Console.ReadLine(), out choice); //function for valid input
+        //        if (!isValidChoice)
+        //        {
+        //            Console.WriteLine("Invalid choice, please try again."); //console?
+        //        }
+        //    }
 
-            return choice;
-        }
+        //    return choice;
+        //}
     }
 }
 
