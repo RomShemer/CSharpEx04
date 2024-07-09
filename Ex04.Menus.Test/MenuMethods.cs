@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Ex04.Menus.Interfaces;
+using Ex04.Menus.Interface;
 
 namespace Ex04.Menus.Test
 {
@@ -13,7 +13,6 @@ namespace Ex04.Menus.Test
         public static void ShowVersion()
         {
             Console.WriteLine("App Version: 24.2.4.9504");
-            Console.ReadKey();
         }
 
         public static void CountCapitals()
@@ -28,20 +27,16 @@ namespace Ex04.Menus.Test
                     capitalCount++;
             }
             Console.WriteLine($"There are {capitalCount} capital letters.");
-            Console.ReadKey();
         }
 
         public static void ShowCurrentTime()
         {
             Console.WriteLine($"Current Time: {DateTime.Now.ToString("HH:mm:ss")}");
-            Console.ReadKey();
         }
 
         public static void ShowCurrentDate()
         {
             Console.WriteLine($"Current Date: {DateTime.Now.ToString("dd.MM.yyyy")}");
-            Console.ReadKey();
         }
-
     }
 }

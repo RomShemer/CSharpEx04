@@ -36,14 +36,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InterfacesTest.cs" />
+    <Compile Include="InterfaceTest.cs" />
     <Compile Include="MenuMethods.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\B24 Ex04\Ex04.Menus.Interfaces.csproj">
+    <ProjectReference Include="..\B24 Ex04\Ex04.Menus.Interface.csproj">
       <Project>{e4babd4b-7989-4cdc-8b9a-839279c3f8a5}</Project>
-      <Name>Ex04.Menus.Interfaces</Name>
+      <Name>Ex04.Menus.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

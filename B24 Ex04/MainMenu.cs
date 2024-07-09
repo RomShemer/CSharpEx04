@@ -1,25 +1,25 @@
-﻿using System;
+﻿using B24_Ex04.Menus.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Ex04.Menus.Interfaces
+namespace Ex04.Menus.Interface
 {
     public class MainMenu
     {
         private readonly MenuItem r_MenuItem; //change name
         private List<MenuItem> m_MenuItemsList = new List<MenuItem>();
-
         public MainMenu(string i_Title)
         {
             r_MenuItem = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
         }
 
-        public void AddASubMenuItem(string i_NewMenuItemTitle)
+        public MenuItem AddASubMenuItemToMainMenu(string i_NewMenuItemTitle)
         {
-            r_MenuItem.AddSubMenuItem(i_NewMenuItemTitle);
+            return r_MenuItem.AddSubMenuItem(i_NewMenuItemTitle);
         }
 
         public MenuItem GetMenuItemByTitle(string i_Title) //check if not null?  if null create any message?
@@ -31,46 +31,7 @@ namespace Ex04.Menus.Interfaces
         {
             r_MenuItem.ActivateItem();
         }
-
-        //public void Show() //string builder? print in Console?
-        //{
-        //    while (true)
-        //    {
-        //        Console.Clear();
-        //        Console.WriteLine("Main Menus:");
-               
-
-        //        Console.WriteLine("0. Exit"); //console?
-
-        //        //int choice = GetUserChoice();
-
-        //        if (choice == 0)
-        //        {
-        //            break;
-        //        }
-        //        if (choice > 0 && choice <= m_MenuItemsList.Count) //   או לפונקציה להכניס לבוליאני
-        //        {
-        //            m_MenuItemsList[choice - 1].Selected();
-        //        }
-        //    }
-        //}
-
-        //private int GetUserChoice()
-        //{
-        //    int choice = k_InvalidChoice;
-        //    bool isValidChoice = false;
-
-        //    while (!isValidChoice)
-        //    {
-        //        isValidChoice = int.TryParse(Console.ReadLine(), out choice); //function for valid input
-        //        if (!isValidChoice)
-        //        {
-        //            Console.WriteLine("Invalid choice, please try again."); //console?
-        //        }
-        //    }
-
-        //    return choice;
-        //}
     }
 }
+
 

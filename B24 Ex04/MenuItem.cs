@@ -5,21 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex04.Menus.Interfaces
+namespace Ex04.Menus.Interface
 {
     public class MenuItem
     {
         private readonly string r_Title;
-        private readonly MenuItem r_Parent; 
+        private readonly MenuItem r_Parent;
         private List<IMenuItemListener> m_ItemMenuListenersList = new List<IMenuItemListener>();
         private List<MenuItem> m_ItemsList = new List<MenuItem>();
         private const int k_backOrExit = 0;
         public const int k_mainMenu = -1;
-
+        private bool m_IsExitOrBack = false;
 
         public MenuItem(string i_Title, MenuItem i_Parent, int i_ItemIndex)
         {
-            if(i_ItemIndex == k_mainMenu)
+            if (i_ItemIndex == k_mainMenu)
             {
                 r_Title = i_Title; // better way to do
             }
@@ -53,7 +53,7 @@ namespace Ex04.Menus.Interfaces
 
         public MenuItem AddSubMenuItem(string i_Title)
         {
-            MenuItem subMenuItem = new MenuItem(i_Title, this, NumberOfItems+1);
+            MenuItem subMenuItem = new MenuItem(i_Title, this, NumberOfItems + 1);
             m_ItemsList.Add(subMenuItem);
 
             return subMenuItem;
@@ -76,7 +76,7 @@ namespace Ex04.Menus.Interfaces
         {
             if (NumberOfItems > 1)
             {
-                activateMenuItem();
+                activateSubMenuItem();
             }
             else
             {
@@ -84,43 +84,60 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
-        private void activateMenuItem()
+        private void activateSubMenuItem()
         {
-            ConsoleUI.PrintMassage(bulidMenuFormat(),true);
-            int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
-            if(choise == k_backOrExit)
+            while (!m_IsExitOrBack)
             {
-                if(r_Parent == null)
+                ConsoleUI.PrintMassage(bulidMenuFormat(), true);
+                int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
+
+                if (choise == k_backOrExit)
                 {
-                    ConsoleUI.EndProgram();
-                    return;
+                    if (r_Parent == null)
+                    {
+                        ConsoleUI.EndProgram();
+                    }
+                    else
+                    {
+                        r_Parent.ActivateItem();
+                    }
+
+                    m_IsExitOrBack = true;
+                    break;
                 }
-                else
-                {
-                    r_Parent.ActivateItem();
-                }
+
+                m_ItemsList[choise - 1].ActivateItem();
             }
-            m_ItemsList[choise - 1].ActivateItem();
         }
 
         private StringBuilder bulidMenuFormat()
         {
-            int i = 1;
             StringBuilder menuFormat = new StringBuilder();
-            menuFormat.AppendFormat($"{0}:",this.Title);
-            menuFormat.AppendLine("========================");
-            menuFormat.AppendFormat($"Enter your choise between 0 to {0}", NumberOfItems);
+
+            menuFormat.AppendFormat($"{this.Title}:");
             menuFormat.AppendLine();
+            menuFormat.AppendLine("========================");
+            menuFormat.AppendFormat($"Enter your choice between 0 to {NumberOfItems}");
+            menuFormat.AppendLine();
+            if(this.r_Parent == null)
+            {
+                menuFormat.AppendLine("0. Exit");
+            }
+            else
+            {
+                menuFormat.AppendLine("0. Back");
+            }
+
             foreach (MenuItem item in m_ItemsList)
             {
-                menuFormat.AppendFormat($"{0}. {1}", i, item.Title);
+                menuFormat.AppendFormat($"{item.Title}");
                 menuFormat.AppendLine();
-                i += 1;
             }
+
             menuFormat.Append("========================");
             return menuFormat;
         }
-        
+
         public void Selected()
         {
             Console.Clear();
