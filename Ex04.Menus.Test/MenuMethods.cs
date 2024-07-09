@@ -42,5 +42,6 @@ namespace Ex04.Menus.Test
             Console.WriteLine($"Current Date: {DateTime.Now.ToString("dd.MM.yyyy")}");
             Console.ReadKey();
         }
+
     }
 }

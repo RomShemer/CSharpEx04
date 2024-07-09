@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B24_Ex04.Menus.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class MenuItem
+    public class MenuItem : IUserChoice
     {
         private readonly string r_Title;
         private readonly MenuItem r_Parent; //todo
@@ -25,6 +26,14 @@ namespace Ex04.Menus.Interfaces
             get
             {
                 return r_Title;
+            }
+        }
+
+        public int NumberOfSubMenuItem
+        {
+            get
+            {
+                return m_subMenuItemList.Count;
             }
         }
 
@@ -52,6 +61,31 @@ namespace Ex04.Menus.Interfaces
             {
                 listener.ReportSelectedActionToListenerFromMenu();
             }
+        }
+
+        public void Show()
+        {
+            int userChoise;
+
+            foreach (MenuItem subMenuItem in m_subMenuItemList)
+            {
+                userChoise = (this as IUserChoice).GetUserChoice();
+
+                if (subMenuItem.NumberOfSubMenuItem > 1)
+                {
+                    subMenuItem.Show();
+                }
+                else
+                {
+                    subMenuItem.Selected();
+                }
+            }
+
+        }
+
+        int IUserChoice.GetUserChoice()
+        {
+            return UserChoiceMethods.GetValidUserChoice(m_subMenuItemList.Count);
         }
 
         public void Selected()

@@ -42,6 +42,7 @@
     <Compile Include="IMenuItemListener.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MenuItem.cs" />
+    <Compile Include="IUserChoice.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
