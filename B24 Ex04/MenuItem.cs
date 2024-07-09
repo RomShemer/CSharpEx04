@@ -12,7 +12,7 @@ namespace Ex04.Menus.Interfaces
         private readonly string r_Title;
         private readonly MenuItem r_Parent; //todo
         private List<IMenuItemListener> m_ItemMenuListenersList = new List<IMenuItemListener>();
-        private List<MenuItem> m_subMenuItemList = new List<MenuItem>();
+        private List<MenuItem> m_ItemList = new List<MenuItem>();
 
 
         public MenuItem(string i_Title, MenuItem i_Parent)
@@ -29,11 +29,11 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
-        public int NumberOfSubMenuItem
+        public int NumberOfItems
         {
             get
             {
-                return m_subMenuItemList.Count;
+                return m_ItemList.Count;
             }
         }
 
@@ -63,26 +63,64 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
-        public void Show()
+        //public void ActivateItem()
+        //{
+        //    int userChoise;
+
+        //    foreach (MenuItem item in m_ItemList)
+        //    {
+        //        userChoise = (this as IUserChoice).GetUserChoice();
+
+        //        if (item.NumberOfItems > 1)
+        //        {
+        //            item.activateSubMenuItem();
+        //        }
+        //        else
+        //        {
+        //            item.Selected();
+        //        }
+        //    }
+        //}
+
+        public void ActivateItem()
         {
-            int userChoise;
-
-            foreach (MenuItem subMenuItem in m_subMenuItemList)
+            if (NumberOfItems > 1)
             {
-                userChoise = (this as IUserChoice).GetUserChoice();
-
-                if (subMenuItem.NumberOfSubMenuItem > 1)
-                {
-                    subMenuItem.Show();
-                }
-                else
-                {
-                    subMenuItem.Selected();
-                }
+                activateSubMenuItem();
             }
-
+            else
+            {
+                Selected();
+            }
         }
 
+        private void activateSubMenuItem()
+        {
+            bulidMenuFormat();
+            //print massage
+            //getinput from user (limit operssnds)
+            // if input == 0
+                // if perrsnt == null exit godbay
+                //else parent.activate
+
+        }
+        private StringBuilder bulidMenuFormat()
+        {
+            int i = 1;
+            StringBuilder menuFormat = new StringBuilder();
+            menuFormat.AppendFormat($"{0}:",this.Title);
+            menuFormat.AppendLine();
+            menuFormat.AppendFormat($"Enter your choise between 0 to {0}", NumberOfItems);
+            menuFormat.AppendLine();
+            foreach (MenuItem item in m_ItemList)
+            {
+                menuFormat.AppendFormat($"{0}. {1}", i, item.Title);
+                menuFormat.AppendLine();
+                i += 1;
+            }
+            return menuFormat;
+        }
+        
         int IUserChoice.GetUserChoice()
         {
             return UserChoiceMethods.GetValidUserChoice(m_subMenuItemList.Count);
