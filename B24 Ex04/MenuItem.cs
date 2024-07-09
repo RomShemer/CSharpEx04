@@ -7,17 +7,26 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class MenuItem : IUserChoice
+    public class MenuItem
     {
         private readonly string r_Title;
-        private readonly MenuItem r_Parent; //todo
+        private readonly MenuItem r_Parent; 
         private List<IMenuItemListener> m_ItemMenuListenersList = new List<IMenuItemListener>();
-        private List<MenuItem> m_ItemList = new List<MenuItem>();
+        private List<MenuItem> m_ItemsList = new List<MenuItem>();
+        private const int k_backOrExit = 0;
+        public const int k_mainMenu = -1;
 
 
-        public MenuItem(string i_Title, MenuItem i_Parent)
+        public MenuItem(string i_Title, MenuItem i_Parent, int i_ItemIndex)
         {
-            r_Title = i_Title;
+            if(i_ItemIndex == k_mainMenu)
+            {
+                r_Title = i_Title; // better way to do
+            }
+            else
+            {
+                r_Title = i_ItemIndex + ". " + i_Title;
+            }
             r_Parent = i_Parent;
         }
 
@@ -33,7 +42,7 @@ namespace Ex04.Menus.Interfaces
         {
             get
             {
-                return m_ItemList.Count;
+                return m_ItemsList.Count;
             }
         }
 
@@ -44,8 +53,8 @@ namespace Ex04.Menus.Interfaces
 
         public MenuItem AddSubMenuItem(string i_Title)
         {
-            MenuItem subMenuItem = new MenuItem(i_Title, this);
-            m_subMenuItemList.Add(subMenuItem);
+            MenuItem subMenuItem = new MenuItem(i_Title, this, NumberOfItems+1);
+            m_ItemsList.Add(subMenuItem);
 
             return subMenuItem;
         }
@@ -63,30 +72,11 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
-        //public void ActivateItem()
-        //{
-        //    int userChoise;
-
-        //    foreach (MenuItem item in m_ItemList)
-        //    {
-        //        userChoise = (this as IUserChoice).GetUserChoice();
-
-        //        if (item.NumberOfItems > 1)
-        //        {
-        //            item.activateSubMenuItem();
-        //        }
-        //        else
-        //        {
-        //            item.Selected();
-        //        }
-        //    }
-        //}
-
         public void ActivateItem()
         {
             if (NumberOfItems > 1)
             {
-                activateSubMenuItem();
+                activateMenuItem();
             }
             else
             {
@@ -94,38 +84,42 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
-        private void activateSubMenuItem()
+        private void activateMenuItem()
         {
-            bulidMenuFormat();
-            //print massage
-            //getinput from user (limit operssnds)
-            // if input == 0
-                // if perrsnt == null exit godbay
-                //else parent.activate
-
+            ConsoleUI.PrintMassage(bulidMenuFormat(),true);
+            int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
+            if(choise == k_backOrExit)
+            {
+                if(r_Parent == null)
+                {
+                    ConsoleUI.EndProgram();
+                    return;
+                }
+                else
+                {
+                    r_Parent.ActivateItem();
+                }
+            }
         }
+
         private StringBuilder bulidMenuFormat()
         {
             int i = 1;
             StringBuilder menuFormat = new StringBuilder();
             menuFormat.AppendFormat($"{0}:",this.Title);
-            menuFormat.AppendLine();
+            menuFormat.AppendLine("========================");
             menuFormat.AppendFormat($"Enter your choise between 0 to {0}", NumberOfItems);
             menuFormat.AppendLine();
-            foreach (MenuItem item in m_ItemList)
+            foreach (MenuItem item in m_ItemsList)
             {
                 menuFormat.AppendFormat($"{0}. {1}", i, item.Title);
                 menuFormat.AppendLine();
                 i += 1;
             }
+            menuFormat.Append("========================");
             return menuFormat;
         }
         
-        int IUserChoice.GetUserChoice()
-        {
-            return UserChoiceMethods.GetValidUserChoice(m_subMenuItemList.Count);
-        }
-
         public void Selected()
         {
             Console.Clear();

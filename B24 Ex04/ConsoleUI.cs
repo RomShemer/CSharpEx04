@@ -2,18 +2,26 @@
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 
-namespace B24_Ex04
+namespace B24_Ex04.Menus.Interfaces
 {
 	public static class ConsoleUI
 	{
-		public static void PrintMassage(string i_Message)
+		public static void PrintMassage(string i_Message, bool i_ToClearScreen = false)
 		{
+			if (i_ToClearScreen)
+			{
+				Console.Clear();
+			}
 			Console.WriteLine(i_Message);
 		}
 
-		public static void PrintMassage(StringBuilder i_Message)
+		public static void PrintMassage(StringBuilder i_Message, bool i_ToClearScreen = false)
 		{
-			Console.WriteLine(i_Message);
+            if (i_ToClearScreen)
+            {
+                Console.Clear();
+            }
+            Console.WriteLine(i_Message);
 		}
 
 		public static int GetChosenOptionfromUser(int i_LowerLimit, int i_HigherLimit)
@@ -33,6 +41,12 @@ namespace B24_Ex04
                 PrintMassage(errorMessage);
 			}
 			return choise;
+		}
+		public static void EndProgram()
+		{
+			Console.Clear();
+			PrintMassage("Program activitly ended. Goodbay",true);
+
 		}
 	}
 }
