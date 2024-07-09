@@ -9,7 +9,6 @@ namespace Ex04.Menus.Test
 {
     public class MenuMethods
     {
-
         public static void ShowVersion()
         {
             Console.WriteLine("App Version: 24.2.4.9504");
@@ -26,7 +25,7 @@ namespace Ex04.Menus.Test
                 if (char.IsUpper(c))
                     capitalCount++;
             }
-            Console.WriteLine($"There are {capitalCount} capital letters.");
+            Console.WriteLine($"There are {capitalCount} capital letters");
         }
 
         public static void ShowCurrentTime()

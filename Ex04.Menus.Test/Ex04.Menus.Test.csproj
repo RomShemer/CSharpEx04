@@ -36,6 +36,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InterfaceClasses\CountCapitals.cs" />
+    <Compile Include="InterfaceClasses\ShowCurrentDate.cs" />
+    <Compile Include="InterfaceClasses\ShowCurrentTime.cs" />
+    <Compile Include="InterfaceClasses\ShowVersion.cs" />
     <Compile Include="InterfaceTest.cs" />
     <Compile Include="MenuMethods.cs" />
     <Compile Include="Program.cs" />

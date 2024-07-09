@@ -15,13 +15,12 @@ namespace Ex04.Menus.Interface
         private List<MenuItem> m_ItemsList = new List<MenuItem>();
         private const int k_backOrExit = 0;
         public const int k_mainMenu = -1;
-        private bool m_IsExitOrBack = false;
 
         public MenuItem(string i_Title, MenuItem i_Parent, int i_ItemIndex)
         {
             if (i_ItemIndex == k_mainMenu)
             {
-                r_Title = i_Title; // better way to do
+                r_Title = i_Title; 
             }
             else
             {
@@ -81,31 +80,28 @@ namespace Ex04.Menus.Interface
             else
             {
                 Selected();
+                r_Parent.ActivateItem();
             }
         }
 
         private void activateSubMenuItem()
         {
-            while (!m_IsExitOrBack)
+            ConsoleUI.PrintMassage(bulidMenuFormat(), true);
+            int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
+
+            if (choise == k_backOrExit)
             {
-                ConsoleUI.PrintMassage(bulidMenuFormat(), true);
-                int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
-
-                if (choise == k_backOrExit)
+                if (r_Parent == null)
                 {
-                    if (r_Parent == null)
-                    {
-                        ConsoleUI.EndProgram();
-                    }
-                    else
-                    {
-                        r_Parent.ActivateItem();
-                    }
-
-                    m_IsExitOrBack = true;
-                    break;
+                    ConsoleUI.EndProgram();
                 }
-
+                else
+                {
+                    r_Parent.ActivateItem();
+                }
+            }
+            else
+            {
                 m_ItemsList[choise - 1].ActivateItem();
             }
         }
@@ -119,19 +115,19 @@ namespace Ex04.Menus.Interface
             menuFormat.AppendLine("========================");
             menuFormat.AppendFormat($"Enter your choice between 0 to {NumberOfItems}");
             menuFormat.AppendLine();
-            if(this.r_Parent == null)
+            foreach (MenuItem item in m_ItemsList)
+            {
+                menuFormat.AppendFormat($"{item.Title}");
+                menuFormat.AppendLine();
+            }
+
+            if (this.r_Parent == null)
             {
                 menuFormat.AppendLine("0. Exit");
             }
             else
             {
                 menuFormat.AppendLine("0. Back");
-            }
-
-            foreach (MenuItem item in m_ItemsList)
-            {
-                menuFormat.AppendFormat($"{item.Title}");
-                menuFormat.AppendLine();
             }
 
             menuFormat.Append("========================");

@@ -23,45 +23,10 @@ namespace Ex04.Menus.Test
 
 
             MenuItem versionAndCapitalsSubMenu = interfaceMenu.AddASubMenuItemToMainMenu(varsionAndCapitalSubMenuItem);
-
+            ShowVersion version = new ShowVersion(versionAndCapitalsSubMenu);
+            CountCapitals countCapitals = new CountCapitals(versionAndCapitalsSubMenu);
 
             return interfaceMenu;
-        }
-
-        //להפריד
-        public class ShowCurrentDate : IMenuItemListener
-        {
-            private readonly string k_Title = "Show Date";
-            private readonly MenuItem r_MenuItem;
-
-            public ShowCurrentDate(MenuItem i_Parent)
-            {
-                r_MenuItem = i_Parent.AddSubMenuItem(k_Title);
-                r_MenuItem.AddItemMenuListener(this);
-            }
-
-            void IMenuItemListener.ReportSelectedActionToListenerFromMenu()
-            {
-                MenuMethods.ShowCurrentDate();
-            }
-        }
-
-        //להפריד
-        public class ShowCurrentTime : IMenuItemListener
-        {
-            private readonly string k_Title = "Show Time";
-            private readonly MenuItem r_MenuItem;
-
-            public ShowCurrentTime(MenuItem i_Parent)
-            {
-                r_MenuItem = i_Parent.AddSubMenuItem(k_Title);
-                r_MenuItem.AddItemMenuListener(this);
-            }
-
-            void IMenuItemListener.ReportSelectedActionToListenerFromMenu()
-            {
-                MenuMethods.ShowCurrentTime();
-            }
         }
     }
 }
