@@ -5,18 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-//noa
 namespace Ex04.Menus.Interfaces
 {
     public class MainMenu
     {
-        private readonly MenuItem r_MenuItem;
-        //private const int k_InvalidChoice = -1;
+        private readonly MenuItem r_MenuItem; //change name
         private List<MenuItem> m_MenuItemsList = new List<MenuItem>();
 
         public MainMenu(string i_Title)
         {
-            r_MenuItem = new MenuItem(i_Title, null);
+            r_MenuItem = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
         }
 
         public void AddASubMenuItem(string i_NewMenuItemTitle)
@@ -29,28 +27,33 @@ namespace Ex04.Menus.Interfaces
             return m_MenuItemsList.Find(menuItem => menuItem.Title == i_Title);
         }
 
-        public void Show() //string builder? print in Console?
+        public void Run()
         {
-            while (true)
-            {
-                Console.Clear();
-                Console.WriteLine("Main Menus:");
+            r_MenuItem.ActivateItem();
+        }
+
+        //public void Show() //string builder? print in Console?
+        //{
+        //    while (true)
+        //    {
+        //        Console.Clear();
+        //        Console.WriteLine("Main Menus:");
                
 
-                Console.WriteLine("0. Exit"); //console?
+        //        Console.WriteLine("0. Exit"); //console?
 
-                //int choice = GetUserChoice();
+        //        //int choice = GetUserChoice();
 
-                if (choice == 0)
-                {
-                    break;
-                }
-                if (choice > 0 && choice <= m_MenuItemsList.Count) //   או לפונקציה להכניס לבוליאני
-                {
-                    m_MenuItemsList[choice - 1].Selected();
-                }
-            }
-        }
+        //        if (choice == 0)
+        //        {
+        //            break;
+        //        }
+        //        if (choice > 0 && choice <= m_MenuItemsList.Count) //   או לפונקציה להכניס לבוליאני
+        //        {
+        //            m_MenuItemsList[choice - 1].Selected();
+        //        }
+        //    }
+        //}
 
         //private int GetUserChoice()
         //{
