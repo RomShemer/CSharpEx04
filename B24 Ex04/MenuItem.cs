@@ -100,6 +100,7 @@ namespace Ex04.Menus.Interfaces
                     r_Parent.ActivateItem();
                 }
             }
+            m_ItemsList[choise - 1].ActivateItem();
         }
 
         private StringBuilder bulidMenuFormat()
