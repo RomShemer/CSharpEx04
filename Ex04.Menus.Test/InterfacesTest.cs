@@ -16,11 +16,14 @@ namespace Ex04.Menus.Test
             string varsionAndCapitalSubMenuItem = "Version And Capital";
 
             MainMenu interfaceMenu = new MainMenu(interfaceMenuTitle);
-            interfaceMenu.AddASubMenuItem (dateSubMenuItem);
-            interfaceMenu.AddASubMenuItem(varsionAndCapitalSubMenuItem);
+            MenuItem dateOrTimeSubMenu = interfaceMenu.AddASubMenuItemToMainMenu (dateSubMenuItem);
 
-            MenuItem dateOrTimeSubMenu = interfaceMenu.GetMenuItemByTitle(dateSubMenuItem);
-            MenuItem versionOrCapitalsSubMenu = interfaceMenu.GetMenuItemByTitle(varsionAndCapitalSubMenuItem);
+            ShowCurrentDate currentDate = new ShowCurrentDate(dateOrTimeSubMenu);
+            ShowCurrentTime currentTime = new ShowCurrentTime(dateOrTimeSubMenu);
+
+
+            MenuItem versionAndCapitalsSubMenu = interfaceMenu.AddASubMenuItemToMainMenu(varsionAndCapitalSubMenuItem);
+
 
             return interfaceMenu;
         }
@@ -40,6 +43,24 @@ namespace Ex04.Menus.Test
             void IMenuItemListener.ReportSelectedActionToListenerFromMenu()
             {
                 MenuMethods.ShowCurrentDate();
+            }
+        }
+
+        //להפריד
+        public class ShowCurrentTime : IMenuItemListener
+        {
+            private readonly string k_Title = "Show Time";
+            private readonly MenuItem r_MenuItem;
+
+            public ShowCurrentTime(MenuItem i_Parent)
+            {
+                r_MenuItem = i_Parent.AddSubMenuItem(k_Title);
+                r_MenuItem.AddItemMenuListener(this);
+            }
+
+            void IMenuItemListener.ReportSelectedActionToListenerFromMenu()
+            {
+                MenuMethods.ShowCurrentTime();
             }
         }
     }

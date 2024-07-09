@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B24_Ex04.Menus.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,9 @@ namespace Ex04.Menus.Interfaces
             r_MenuItem = new MenuItem(i_Title, null);
         }
 
-        public void AddASubMenuItem(string i_NewMenuItemTitle)
+        public MenuItem AddASubMenuItemToMainMenu(string i_NewMenuItemTitle)
         {
-            r_MenuItem.AddSubMenuItem(i_NewMenuItemTitle);
+            return r_MenuItem.AddSubMenuItem(i_NewMenuItemTitle);
         }
 
         public MenuItem GetMenuItemByTitle(string i_Title) //check if not null?  if null create any message?
@@ -34,38 +35,16 @@ namespace Ex04.Menus.Interfaces
                 Console.Clear();
                 Console.WriteLine("Main Menus:");
                
-
+                //PrintFunction OfMenuItem
                 Console.WriteLine("0. Exit"); //console?
 
-                //int choice = GetUserChoice();
-
-                if (choice == 0)
-                {
-                    break;
-                }
-                if (choice > 0 && choice <= m_MenuItemsList.Count) //   או לפונקציה להכניס לבוליאני
-                {
-                    m_MenuItemsList[choice - 1].Selected();
-                }
+                //just for debug
+                r_MenuItem.ShowMenuItems();
+                int coice = UserChoice.UserChoiceMethods.GetValidUserChoice(r_MenuItem.NumberOfItems);
+                r_MenuItem.ActivateItem(coice - 1);
             }
         }
 
-        //private int GetUserChoice()
-        //{
-        //    int choice = k_InvalidChoice;
-        //    bool isValidChoice = false;
-
-        //    while (!isValidChoice)
-        //    {
-        //        isValidChoice = int.TryParse(Console.ReadLine(), out choice); //function for valid input
-        //        if (!isValidChoice)
-        //        {
-        //            Console.WriteLine("Invalid choice, please try again."); //console?
-        //        }
-        //    }
-
-        //    return choice;
-        //}
     }
 }
 
