@@ -105,7 +105,8 @@ namespace Ex04.Menus.Interface
                 m_ItemsList[choise - 1].ActivateItem();
             }
         }
-
+         
+       
         private StringBuilder bulidMenuFormat()
         {
             StringBuilder menuFormat = new StringBuilder();
@@ -140,6 +141,7 @@ namespace Ex04.Menus.Interface
             NotifyMenuItemSelectedListeners();
             Console.WriteLine("Press Enter to continue."); //console?
             Console.ReadLine();
+            r_Parent.ActivateItem();
         }
     }
 }
