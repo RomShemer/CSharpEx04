@@ -7,22 +7,21 @@ using Ex04.Menus.Interface;
 
 namespace Ex04.Menus.Test
 {
-    internal class InterfaceTest
+    public class InterfaceTest
     {
         public static MainMenu BuildInterfaceMainMenu()
         {
-            string interfaceMenuTitle = "Main Menu";
+            string interfaceMenuTitle = "Interface Main Menu";
             string dateSubMenuItem = "Show Date/Time";
             string varsionAndCapitalSubMenuItem = "Version And Capital";
 
             MainMenu interfaceMenu = new MainMenu(interfaceMenuTitle);
-            MenuItem dateOrTimeSubMenu = interfaceMenu.AddASubMenuItemToMainMenu (dateSubMenuItem);
-
+            MenuItem dateOrTimeSubMenu = interfaceMenu.AddANewMenuItemToMainMenu (dateSubMenuItem);
+            //add the subMenuItem to dateOrTime menu
             ShowCurrentDate currentDate = new ShowCurrentDate(dateOrTimeSubMenu);
             ShowCurrentTime currentTime = new ShowCurrentTime(dateOrTimeSubMenu);
-
-
-            MenuItem versionAndCapitalsSubMenu = interfaceMenu.AddASubMenuItemToMainMenu(varsionAndCapitalSubMenuItem);
+            //add the subMenuItem to versionAndCountCapitals menu
+            MenuItem versionAndCapitalsSubMenu = interfaceMenu.AddANewMenuItemToMainMenu(varsionAndCapitalSubMenuItem);
             ShowVersion version = new ShowVersion(versionAndCapitalsSubMenu);
             CountCapitals countCapitals = new CountCapitals(versionAndCapitalsSubMenu);
 

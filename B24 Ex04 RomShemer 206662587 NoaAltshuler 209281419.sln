@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex04.Menus.Interface", "B24
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex04.Menus.Test", "Ex04.Menus.Test\Ex04.Menus.Test.csproj", "{1DEE6F31-5303-4866-846C-4D89B47CCE24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex04.Menus.Delegate", "Ex04.Menus.Delegates\Ex04.Menus.Delegate.csproj", "{A1F9F3AD-D86A-4A18-AE5E-AA9856E9FA1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1DEE6F31-5303-4866-846C-4D89B47CCE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DEE6F31-5303-4866-846C-4D89B47CCE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DEE6F31-5303-4866-846C-4D89B47CCE24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1F9F3AD-D86A-4A18-AE5E-AA9856E9FA1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1F9F3AD-D86A-4A18-AE5E-AA9856E9FA1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1F9F3AD-D86A-4A18-AE5E-AA9856E9FA1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1F9F3AD-D86A-4A18-AE5E-AA9856E9FA1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,6 +12,8 @@ namespace Ex04.Menus.Test
         {
             Interface.MainMenu interfaceMenu = InterfaceTest.BuildInterfaceMainMenu();
             interfaceMenu.Run();
+            Delegate.MainMenu delegateMenu = DelegateTest.BuildDelegateMenu();
+            delegateMenu.Run();
         }
     }
 }
