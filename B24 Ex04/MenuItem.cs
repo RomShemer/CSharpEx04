@@ -86,30 +86,29 @@ namespace Ex04.Menus.Interface
 
         private void activateSubMenuItem()
         {
-            while (!m_IsExitOrBack)
+            ConsoleUI.PrintMassage(bulidMenuFormat(), true);
+            int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
+
+            if (choise == k_backOrExit)
             {
-                ConsoleUI.PrintMassage(bulidMenuFormat(), true);
-                int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
-
-                if (choise == k_backOrExit)
+                if (r_Parent == null)
                 {
-                    if (r_Parent == null)
-                    {
-                        ConsoleUI.EndProgram();
-                    }
-                    else
-                    {
-                        r_Parent.ActivateItem();
-                    }
-
-                    m_IsExitOrBack = true;
-                    break;
+                    ConsoleUI.EndProgram();
+                    return;
+                }
+                else
+                {
+                    r_Parent.ActivateItem();
                 }
 
+            }
+            else
+            {
                 m_ItemsList[choise - 1].ActivateItem();
             }
         }
-
+         
+       
         private StringBuilder bulidMenuFormat()
         {
             StringBuilder menuFormat = new StringBuilder();
@@ -144,6 +143,7 @@ namespace Ex04.Menus.Interface
             NotifyMenuItemSelectedListeners();
             Console.WriteLine("Press Enter to continue."); //console?
             Console.ReadLine();
+            r_Parent.ActivateItem();
         }
     }
 }
