@@ -8,6 +8,6 @@ namespace Ex04.Menus.Interface
 {
     public interface IMenuItemListener
     {
-        void ReportSelectedActionToListenerFromMenu();//change name?
+        void ReportSelectedActionToListenerFromMenu();
     }
 }

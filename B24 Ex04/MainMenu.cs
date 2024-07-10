@@ -10,20 +10,20 @@ namespace Ex04.Menus.Interface
 {
     public class MainMenu
     {
-        private readonly MenuItem r_MenuItem; //change name maybe "MenuHead"?
+        private readonly MenuItem r_MainMenuItem;
         public MainMenu(string i_Title)
         {
-            r_MenuItem = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
+            r_MainMenuItem = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
         }
 
         public MenuItem AddANewMenuItemToMainMenu(string i_NewMenuItemTitle)
         {
-            return r_MenuItem.AddSubMenuItem(i_NewMenuItemTitle);
+            return r_MainMenuItem.AddSubMenuItem(i_NewMenuItemTitle);
         }
 
         public void Run()
         {
-            r_MenuItem.ActivateItem();
+            r_MainMenuItem.ActivateItem();
         }
     }
 }

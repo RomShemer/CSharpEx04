@@ -69,7 +69,19 @@ namespace Ex04.Menus.Delegate
         private void activateSubMenuItem()
         {
             ConsoleUI.PrintMassage(bulidMenuFormat(), true);
-            int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
+            int choise;
+            while (true)
+            {
+                try
+                {
+                    choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
+                }
+                catch
+                {
+                    continue;
+                }
+                break;
+            }
 
             if (choise == k_backOrExit)
             {
@@ -88,7 +100,7 @@ namespace Ex04.Menus.Delegate
             }
         }
 
-        protected virtual void OnSelected()
+        protected virtual void OnSelected() // again is it agood name?
         {
             Selected?.Invoke(); //or check if null if the version is older
         }

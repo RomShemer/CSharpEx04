@@ -2,6 +2,8 @@
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 
+
+
 namespace B24_Ex04.Menus.Interfaces
 {
 	public static class ConsoleUI
@@ -33,15 +35,17 @@ namespace B24_Ex04.Menus.Interfaces
 		private static int validateInput(string  io_Input, int i_LowerLimit, int i_HigherLimit)
 		{
 			int choise;
-			while(!int.TryParse(io_Input,out choise) || choise<i_LowerLimit || choise>i_HigherLimit)
+			if(!int.TryParse(io_Input, out choise))
 			{
-				StringBuilder errorMessage = new StringBuilder();
-                errorMessage.AppendFormat($"Please enter a intger number between {0} - {1}", i_LowerLimit, i_HigherLimit);
-				errorMessage.AppendLine();
-                PrintMassage(errorMessage);
+				throw new FormatException($"Please enter a intger number");
+			}
+			else if( choise < i_LowerLimit || choise > i_HigherLimit)
+			{
+				throw new ArgumentException($"Please enter a intger number between {i_LowerLimit} - {i_HigherLimit}");
 			}
 			return choise;
 		}
+
 		public static void EndProgram()
 		{
 			Console.Clear();
