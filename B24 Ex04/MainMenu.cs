@@ -1,5 +1,4 @@
-﻿using B24_Ex04.Menus.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,20 +9,28 @@ namespace Ex04.Menus.Interface
 {
     public class MainMenu
     {
-        private readonly MenuItem r_MainMenuItem;
-        public MainMenu(string i_Title)
+        private readonly SubMenu r_MainMenuItem;
+        public SubMenu MainMenuItem
         {
-            r_MainMenuItem = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
+            get
+            {
+                return r_MainMenuItem;
+            }
         }
 
-        public MenuItem AddANewMenuItemToMainMenu(string i_NewMenuItemTitle)
+        public MainMenu(string i_Title)
         {
-            return r_MainMenuItem.AddSubMenuItem(i_NewMenuItemTitle);
+            r_MainMenuItem = new SubMenu(i_Title, null, SubMenu.k_mainMenu);
+        }
+
+        public void AddANewMenuItemToMainMenu(MenuItem i_Item)
+        {
+            r_MainMenuItem.AddMenuItem(i_Item);
         }
 
         public void Run()
         {
-            r_MainMenuItem.ActivateItem();
+            (r_MainMenuItem as MenuItem).ActivateItem();
         }
     }
 }

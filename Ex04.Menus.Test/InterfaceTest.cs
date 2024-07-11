@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ex04.Menus.Interface;
+﻿using Ex04.Menus.Interface;
 
 namespace Ex04.Menus.Test
 {
@@ -11,19 +6,18 @@ namespace Ex04.Menus.Test
     {
         public static MainMenu BuildInterfaceMainMenu()
         {
-            string interfaceMenuTitle = "Interface Main Menu";
-            string dateSubMenuItem = "Show Date/Time";
-            string varsionAndCapitalSubMenuItem = "Version And Capital";
-
-            MainMenu interfaceMenu = new MainMenu(interfaceMenuTitle);
-            MenuItem dateOrTimeSubMenu = interfaceMenu.AddANewMenuItemToMainMenu (dateSubMenuItem);
+            MainMenu interfaceMenu = new MainMenu("Interface Main Menu");
+            //add Items to main menu
+            SubMenu dateSubMenu = new SubMenu("Show Date/Time", interfaceMenu.MainMenuItem, interfaceMenu.MainMenuItem.NumberOfItems+1);
+            interfaceMenu.MainMenuItem.AddMenuItem(dateSubMenu);
+            SubMenu varsionAndCapitalSubMenu = new SubMenu("Version And Capital", interfaceMenu.MainMenuItem, interfaceMenu.MainMenuItem.NumberOfItems+1);
+            interfaceMenu.MainMenuItem.AddMenuItem(varsionAndCapitalSubMenu);
             //add the subMenuItem to dateOrTime menu
-            ShowCurrentDate currentDate = new ShowCurrentDate(dateOrTimeSubMenu);
-            ShowCurrentTime currentTime = new ShowCurrentTime(dateOrTimeSubMenu);
+            new ShowCurrentDate(dateSubMenu);
+            new ShowCurrentTime(dateSubMenu);
             //add the subMenuItem to versionAndCountCapitals menu
-            MenuItem versionAndCapitalsSubMenu = interfaceMenu.AddANewMenuItemToMainMenu(varsionAndCapitalSubMenuItem);
-            ShowVersion version = new ShowVersion(versionAndCapitalsSubMenu);
-            CountCapitals countCapitals = new CountCapitals(versionAndCapitalsSubMenu);
+            new ShowVersion(varsionAndCapitalSubMenu);
+            new CountCapitals(varsionAndCapitalSubMenu);
 
             return interfaceMenu;
         }

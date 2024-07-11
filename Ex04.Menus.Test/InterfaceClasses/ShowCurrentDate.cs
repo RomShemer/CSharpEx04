@@ -5,16 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Ex04.Menus.Test
 {
     public class ShowCurrentDate : IMenuItemListener
     {
         private const string k_Title = "Show Date";
-        private readonly MenuItem r_MenuItem;
+        private readonly LeafAction r_MenuItem;
 
-        public ShowCurrentDate(MenuItem i_Parent)
+        public ShowCurrentDate(SubMenu i_Parent)
         {
-            r_MenuItem = i_Parent.AddSubMenuItem(k_Title);
+            r_MenuItem = new LeafAction(k_Title, i_Parent, i_Parent.NumberOfItems + 1);
+            i_Parent.AddMenuItem(r_MenuItem);
             r_MenuItem.AddItemMenuListener(this);
         }
 

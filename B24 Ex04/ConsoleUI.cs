@@ -2,9 +2,7 @@
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 
-
-
-namespace B24_Ex04.Menus.Interfaces
+namespace Ex04.Menus.Interface
 {
 	public static class ConsoleUI
 	{
@@ -41,7 +39,7 @@ namespace B24_Ex04.Menus.Interfaces
 			}
 			else if( choise < i_LowerLimit || choise > i_HigherLimit)
 			{
-				throw new ArgumentException($"Please enter a intger number between {i_LowerLimit} - {i_HigherLimit}");
+				throw new ArgumentOutOfRangeException($"Please enter a intger number between {i_LowerLimit} - {i_HigherLimit}");
 			}
 			return choise;
 		}

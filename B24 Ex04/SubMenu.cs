@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 
-namespace Ex04.Menus.Delegate
-{
-    public class MenuItem
+namespace Ex04.Menus.Interface
+{ 
+    public class SubMenu:MenuItem
     {
         private readonly string r_Title;
-        private readonly MenuItem r_Parent;
+        private readonly SubMenu r_Parent;
         private List<MenuItem> m_ItemsList = new List<MenuItem>();
-        public event Action Selected;
         private const int k_backOrExit = 0;
         public const int k_mainMenu = -1;
 
-        public MenuItem(string i_Title, MenuItem i_Parent, int i_ItemIndex)
+        public SubMenu(string i_Title, SubMenu i_Parent, int i_ItemIndex)
         {
             if (i_ItemIndex == k_mainMenu)
             {
@@ -23,7 +21,6 @@ namespace Ex04.Menus.Delegate
             {
                 r_Title = i_ItemIndex + ". " + i_Title;
             }
-
             r_Parent = i_Parent;
         }
 
@@ -43,28 +40,12 @@ namespace Ex04.Menus.Delegate
             }
         }
 
-        public MenuItem AddMenuItem(string i_Title)
+        public void AddMenuItem(MenuItem i_Item)
         {
-            MenuItem menuItem = new MenuItem(i_Title, this, NumberOfItems + 1);
-            m_ItemsList.Add(menuItem);
-
-            return menuItem;
+            m_ItemsList.Add(i_Item);
         }
 
-        public void ActivateItem()
-        {
-            if (NumberOfItems > 1)
-            {
-                activateSubMenuItem();
-            }
-            else
-            {
-                menuItemSelected();
-                r_Parent.ActivateItem();
-            }
-        }
-
-        private void activateSubMenuItem()
+        void MenuItem.ActivateItem()
         {
             ConsoleUI.PrintMassage(bulidMenuFormat(), true);
             int choise;
@@ -89,26 +70,13 @@ namespace Ex04.Menus.Delegate
                 }
                 else
                 {
-                    r_Parent.ActivateItem();
+                    (r_Parent as MenuItem).ActivateItem();
                 }
             }
             else
             {
                 m_ItemsList[choise - 1].ActivateItem();
             }
-        }
-
-        protected virtual void OnSelected() // again is it agood name?
-        {
-            Selected?.Invoke(); //or check if null if the version is older
-        }
-
-        private void menuItemSelected() //name
-        {
-            Console.Clear();
-            OnSelected();
-            Console.WriteLine("Press Enter to continue.");
-            Console.ReadLine();
         }
 
         private StringBuilder bulidMenuFormat()
@@ -122,7 +90,7 @@ namespace Ex04.Menus.Delegate
             menuFormat.AppendLine();
             foreach (MenuItem item in m_ItemsList)
             {
-                menuFormat.AppendFormat($"{item.Title}");
+                menuFormat.AppendFormat($"{item.getTitle()}");
                 menuFormat.AppendLine();
             }
 
@@ -138,5 +106,13 @@ namespace Ex04.Menus.Delegate
             menuFormat.Append("========================");
             return menuFormat;
         }
+
+        string MenuItem.getTitle()
+        {
+            return Title;
+        }
+
     }
 }
+
+
