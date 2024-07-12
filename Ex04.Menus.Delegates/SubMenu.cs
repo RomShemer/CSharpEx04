@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace Ex04.Menus.Interface
+namespace Ex04.Menus.Delegate
 {
     public class SubMenu : MenuItem
     { 

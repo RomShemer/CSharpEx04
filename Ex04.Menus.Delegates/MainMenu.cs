@@ -8,21 +8,23 @@ namespace Ex04.Menus.Delegate
 {
     public class MainMenu
     {
-        private readonly MenuItem r_MenuItem;
+        private readonly SubMenu r_MainMenuItem;
+        public SubMenu MainMenuItem
+        {
+            get
+            {
+                return r_MainMenuItem;
+            }
+        }
 
         public MainMenu(string i_Title)
         {
-            r_MenuItem = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
-        }
-
-        public MenuItem AddANewMenuItemToMainMenu(string i_NewMenuItemTitle)
-        {
-            return r_MenuItem.AddMenuItem(i_NewMenuItemTitle);
+            r_MainMenuItem = new SubMenu(i_Title, null, SubMenu.k_mainMenu);
         }
 
         public void Run()
         {
-            r_MenuItem.ActivateItem();
+            r_MainMenuItem.ActivateItem();
         }
     }
 }

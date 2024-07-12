@@ -23,14 +23,9 @@ namespace Ex04.Menus.Interface
             r_MainMenuItem = new SubMenu(i_Title, null, SubMenu.k_mainMenu);
         }
 
-        public void AddANewMenuItemToMainMenu(MenuItem i_Item)
-        {
-            r_MainMenuItem.AddMenuItem(i_Item);
-        }
-
         public void Run()
         {
-            (r_MainMenuItem as MenuItem).ActivateItem();
+            r_MainMenuItem.ActivateItem();
         }
     }
 }

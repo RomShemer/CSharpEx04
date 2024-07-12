@@ -4,16 +4,14 @@ using System.Text;
 
 namespace Ex04.Menus.Delegate
 {
-    public class MenuItem
+    public abstract class MenuItem
     {
         private readonly string r_Title;
-        private readonly MenuItem r_Parent;
-        private List<MenuItem> m_ItemsList = new List<MenuItem>();
-        public event Action Selected;
-        private const int k_backOrExit = 0;
+        private readonly SubMenu r_Parent;
         public const int k_mainMenu = -1;
+        public abstract void ActivateItem();
 
-        public MenuItem(string i_Title, MenuItem i_Parent, int i_ItemIndex)
+        public MenuItem(string i_Title, SubMenu i_Parent, int i_ItemIndex)
         {
             if (i_ItemIndex == k_mainMenu)
             {
@@ -23,7 +21,6 @@ namespace Ex04.Menus.Delegate
             {
                 r_Title = i_ItemIndex + ". " + i_Title;
             }
-
             r_Parent = i_Parent;
         }
 
@@ -35,108 +32,12 @@ namespace Ex04.Menus.Delegate
             }
         }
 
-        public int NumberOfItems
+        public SubMenu Parent
         {
             get
             {
-                return m_ItemsList.Count;
+                return r_Parent;
             }
-        }
-
-        public MenuItem AddMenuItem(string i_Title)
-        {
-            MenuItem menuItem = new MenuItem(i_Title, this, NumberOfItems + 1);
-            m_ItemsList.Add(menuItem);
-
-            return menuItem;
-        }
-
-        public void ActivateItem()
-        {
-            if (NumberOfItems > 1)
-            {
-                activateSubMenuItem();
-            }
-            else
-            {
-                menuItemSelected();
-                r_Parent.ActivateItem();
-            }
-        }
-
-        private void activateSubMenuItem()
-        {
-            ConsoleUI.PrintMassage(bulidMenuFormat(), true);
-            int choise;
-            while (true)
-            {
-                try
-                {
-                    choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
-                }
-                catch
-                {
-                    continue;
-                }
-                break;
-            }
-
-            if (choise == k_backOrExit)
-            {
-                if (r_Parent == null)
-                {
-                    ConsoleUI.EndProgram();
-                }
-                else
-                {
-                    r_Parent.ActivateItem();
-                }
-            }
-            else
-            {
-                m_ItemsList[choise - 1].ActivateItem();
-            }
-        }
-
-        protected virtual void OnSelected() // again is it agood name?
-        {
-            Selected?.Invoke(); //or check if null if the version is older
-        }
-
-        private void menuItemSelected() //name
-        {
-            Console.Clear();
-            OnSelected();
-            Console.WriteLine("Press Enter to continue.");
-            Console.ReadLine();
-        }
-
-        private StringBuilder bulidMenuFormat()
-        {
-            StringBuilder menuFormat = new StringBuilder();
-
-            menuFormat.AppendFormat($"{this.Title}:");
-            menuFormat.AppendLine();
-            menuFormat.AppendLine("========================");
-            menuFormat.AppendFormat($"Enter your choice between 0 to {NumberOfItems}");
-            menuFormat.AppendLine();
-            foreach (MenuItem item in m_ItemsList)
-            {
-                menuFormat.AppendFormat($"{item.Title}");
-                menuFormat.AppendLine();
-            }
-
-            if (this.r_Parent == null)
-            {
-                menuFormat.AppendLine("0. Exit");
-            }
-            else
-            {
-                menuFormat.AppendLine("0. Back");
-            }
-
-            menuFormat.Append("========================");
-            return menuFormat;
         }
     }
 }

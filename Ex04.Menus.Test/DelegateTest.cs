@@ -11,26 +11,28 @@ namespace Ex04.Menus.Test
     {
         public static MainMenu BuildDelegateMenu()
         {
-            string delegateMenuTitle = "Delegate Main Menu";
-            string dateSubMenuItem = "Show Date/Time";
-            string varsionAndCapitalSubMenuItem = "Version And Capital";
-            //are we fine woth this spaces ?
-            MainMenu delegateMenu = new MainMenu(delegateMenuTitle);
+            MainMenu delegateMenu = new MainMenu("Delegate Main Menu");
 
-            MenuItem dateOrTimeMenu = delegateMenu.AddANewMenuItemToMainMenu(dateSubMenuItem);
-            MenuItem versionAndCapitalMenu = delegateMenu.AddANewMenuItemToMainMenu(varsionAndCapitalSubMenuItem);
+            SubMenu dateOrTimeMenu = new SubMenu("Show Date/Time", delegateMenu.MainMenuItem, delegateMenu.MainMenuItem.NumberOfItems + 1);
+            delegateMenu.MainMenuItem.AddMenuItem(dateOrTimeMenu);
+            SubMenu versionAndCapitalMenu = new SubMenu("Version And Capital",  delegateMenu.MainMenuItem, delegateMenu.MainMenuItem.NumberOfItems+1);
+            delegateMenu.MainMenuItem.AddMenuItem(versionAndCapitalMenu);
 
-            MenuItem showDate = dateOrTimeMenu.AddMenuItem("Show Date");
+            LeafAction showDate = new LeafAction("Show Date", dateOrTimeMenu, dateOrTimeMenu.NumberOfItems + 1);
+            dateOrTimeMenu.AddMenuItem(showDate);
             showDate.Selected += menuItemShowDate_Selected;
 
-            MenuItem showTime = dateOrTimeMenu.AddMenuItem("Show Time");
-            showTime.Selected += menuItemShowTime_Selected;
+            LeafAction showTime = new LeafAction("Show Time", dateOrTimeMenu, dateOrTimeMenu.NumberOfItems + 1);
+            dateOrTimeMenu.AddMenuItem(showTime);
+            showTime.Selected += menuItemShowDate_Selected;
 
-            MenuItem countCapitals = versionAndCapitalMenu.AddMenuItem("Count Capitals");
-            countCapitals.Selected += menuItemCountCapitals_Selected;
+            LeafAction countCapitals = new LeafAction("Count Capitals", versionAndCapitalMenu, versionAndCapitalMenu.NumberOfItems + 1);
+            versionAndCapitalMenu.AddMenuItem(countCapitals);
+            countCapitals.Selected += menuItemShowDate_Selected;
 
-            MenuItem showVersion = versionAndCapitalMenu.AddMenuItem("Show Version");
-            showVersion.Selected += menuItemShowVersion_Selected;
+            LeafAction showVersion = new LeafAction("Show Version", versionAndCapitalMenu, versionAndCapitalMenu.NumberOfItems + 1);
+            versionAndCapitalMenu.AddMenuItem(showVersion);
+            showVersion.Selected += menuItemShowDate_Selected;
 
             return delegateMenu;
         }

@@ -6,6 +6,7 @@ namespace Ex04.Menus.Interface
 {
 	public static class ConsoleUI
 	{
+		
 		public static void PrintMassage(string i_Message, bool i_ToClearScreen = false)
 		{
 			if (i_ToClearScreen)
@@ -52,4 +53,3 @@ namespace Ex04.Menus.Interface
 		}
 	}
 }
-

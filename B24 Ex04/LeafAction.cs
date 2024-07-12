@@ -5,22 +5,10 @@ namespace Ex04.Menus.Interface
 {
     public class LeafAction : MenuItem
     {
-        private readonly string r_Title;
-        private readonly SubMenu r_Parent;
         private List<IMenuItemListener> m_ItemMenuListenersList = new List<IMenuItemListener>();
 
-        string Title
+        public LeafAction(string i_Title, SubMenu i_Parent, int i_ItemIndex): base(i_Title, i_Parent,i_ItemIndex)
         {
-            get
-            {
-                return r_Title;
-            }
-        }
-
-        public LeafAction(string i_Title, SubMenu i_Parent, int i_ItemIndex)
-        {
-            r_Title = i_ItemIndex + ". " + i_Title;
-            r_Parent = i_Parent;
         }
 
         public void AddItemMenuListener(IMenuItemListener i_MenuItemListener)
@@ -41,20 +29,14 @@ namespace Ex04.Menus.Interface
             }
         }
 
-        void MenuItem.ActivateItem()
+        public override void ActivateItem()
         {
             ConsoleUI.PrintMassage("", true);
             NotifyMenuItemSelectedListeners();
             ConsoleUI.PrintMassage("Press any key to continue");
             Console.ReadLine();
-            (r_Parent as MenuItem).ActivateItem();
+            Parent.ActivateItem();
         }
-
-        string MenuItem.getTitle()
-        {
-            return Title;
-        }
-
     }
 }
 
