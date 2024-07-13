@@ -16,39 +16,39 @@ namespace Ex04.Menus.Test
             //creates and add the action of show date into the subMenu 
             LeafAction showDate = new LeafAction("Show Date", dateOrTimeMenu, dateOrTimeMenu.NumberOfItems + 1);
             dateOrTimeMenu.AddMenuItem(showDate);
-            showDate.Selected += DelegateTest.showDate;
+            showDate.Selected += DelegateTest.showDate_Selected;
             //creates and add the action of show time into the subMenu 
             LeafAction showTime = new LeafAction("Show Time", dateOrTimeMenu, dateOrTimeMenu.NumberOfItems + 1);
             dateOrTimeMenu.AddMenuItem(showTime);
-            showTime.Selected += DelegateTest.showTime;
+            showTime.Selected += DelegateTest.showTime_Selected;
             //creates and add the action of show version into the subMenu 
             LeafAction showVersion = new LeafAction("Show Version", versionAndCapitalMenu, versionAndCapitalMenu.NumberOfItems + 1);
             versionAndCapitalMenu.AddMenuItem(showVersion);
-            showVersion.Selected += DelegateTest.showVersion;
+            showVersion.Selected += DelegateTest.showVersion_Selected;
             //creates and add the action of count capitals letter into the subMenu 
             LeafAction countCapitals = new LeafAction("Count Capitals", versionAndCapitalMenu, versionAndCapitalMenu.NumberOfItems + 1);
             versionAndCapitalMenu.AddMenuItem(countCapitals);
-            countCapitals.Selected += DelegateTest.countCapitals;
+            countCapitals.Selected += DelegateTest.countCapitals_Selected;
 
             return delegateMenu;
         }
 
-        private static void showDate()
+        private static void showDate_Selected()
         {
             MenuMethods.ShowCurrentDate();
         }
 
-        private static void showTime()
+        private static void showTime_Selected()
         {
             MenuMethods.ShowCurrentTime();
         }
 
-        private static void countCapitals()
+        private static void countCapitals_Selected()
         {
             MenuMethods.CountCapitals();
         }
 
-        private static void showVersion()
+        private static void showVersion_Selected()
         {
             MenuMethods.ShowVersion();
         }
