@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="IMenuItemListener.cs" />
     <Compile Include="MainMenu.cs" />
-    <Compile Include="ConsoleUI.cs" />
+    <Compile Include="ConsoleMenu.cs" />
     <Compile Include="SubMenu.cs" />
     <Compile Include="MenuItem.cs" />
     <Compile Include="LeafAction.cs" />

@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex04.Menus.Test
+﻿namespace Ex04.Menus.Test
 {
     public class Program
     {
         static void Main()
         {
             Interface.MainMenu interfaceMenu = InterfaceTest.BuildInterfaceMainMenu();
-            interfaceMenu.Run();
+            interfaceMenu.RunMenu();
             Delegate.MainMenu delegateMenu = DelegateTest.BuildDelegateMenu();
-            delegateMenu.Run();
+            delegateMenu.RunMenu();
         }
     }
 }

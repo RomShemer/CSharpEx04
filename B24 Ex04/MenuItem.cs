@@ -4,12 +4,13 @@
 	{
         private readonly string r_Title;
         private readonly SubMenu r_Parent;
-        public const int k_mainMenu = -1;
-        public abstract void ActivateItem();
+        public const int k_MainMenuIndexKey = -1;
 
 		public MenuItem(string i_Title, SubMenu i_Parent, int i_ItemIndex)
 		{
-            if (i_ItemIndex == k_mainMenu)
+            bool isMainMenu = i_ItemIndex == k_MainMenuIndexKey;
+
+            if (isMainMenu)
             {
                 r_Title = i_Title;
             }
@@ -17,6 +18,7 @@
             {
                 r_Title = i_ItemIndex + ". " + i_Title;
             }
+
             r_Parent = i_Parent;
         }
 
@@ -34,7 +36,8 @@
             {
                 return r_Parent;
             }
-        }     
+        }
+       
+        public abstract void ActivateItem();
     }
 }
-

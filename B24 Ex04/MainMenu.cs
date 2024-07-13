@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace Ex04.Menus.Interface
+﻿namespace Ex04.Menus.Interface
 {
     public class MainMenu
     {
         private readonly SubMenu r_MainMenuItem;
+       
         public SubMenu MainMenuItem
         {
             get
@@ -20,14 +14,12 @@ namespace Ex04.Menus.Interface
 
         public MainMenu(string i_Title)
         {
-            r_MainMenuItem = new SubMenu(i_Title, null, SubMenu.k_mainMenu);
+            r_MainMenuItem = new SubMenu(i_Title, null, MenuItem.k_MainMenuIndexKey);
         }
 
-        public void Run()
+        public void RunMenu()
         {
             r_MainMenuItem.ActivateItem();
         }
     }
 }
-
-

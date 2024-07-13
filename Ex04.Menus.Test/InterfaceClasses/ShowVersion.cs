@@ -1,25 +1,20 @@
 ﻿using Ex04.Menus.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex04.Menus.Test
 {
     public class ShowVersion : IMenuItemListener
     {
         private const string k_Title = "Show Version";
-        private readonly LeafAction r_MenuItem;
+        private readonly LeafAction r_MenuLeafAction;
 
         public ShowVersion(SubMenu i_Parent)
         {
-            r_MenuItem = new LeafAction(k_Title, i_Parent, i_Parent.NumberOfItems + 1);
-            i_Parent.AddMenuItem(r_MenuItem);
-            r_MenuItem.AddItemMenuListener(this);
+            r_MenuLeafAction = new LeafAction(k_Title, i_Parent, i_Parent.NumberOfItems + 1);
+            i_Parent.AddMenuItem(r_MenuLeafAction);
+            r_MenuLeafAction.AddItemMenuListener(this);
         }
 
-        void IMenuItemListener.ReportSelectedActionToListenerFromMenu()
+        void IMenuItemListener.ReportSelectedToListenerFromMenu()
         {
             MenuMethods.ShowVersion();
         }

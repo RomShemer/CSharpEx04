@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Ex04.Menus.Delegate
 {
@@ -7,9 +6,7 @@ namespace Ex04.Menus.Delegate
     {
         public event Action Selected;
 
-        public LeafAction(string i_Title, SubMenu i_Parent, int i_ItemIndex): base(i_Title, i_Parent,i_ItemIndex)
-        {
-        }
+        public LeafAction(string i_Title, SubMenu i_Parent, int i_ItemIndex): base(i_Title, i_Parent,i_ItemIndex){}
 
         protected virtual void OnSelected() 
         {
@@ -26,4 +23,3 @@ namespace Ex04.Menus.Delegate
         }
     }
 }
-

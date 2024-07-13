@@ -1,53 +1,61 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Ex04.Menus.Delegate
 {
     public class SubMenu : MenuItem
-    { 
-        private List<MenuItem> m_ItemsList = new List<MenuItem>();
-        private const int k_backOrExit = 0;
+    {
+        private readonly List<MenuItem> r_ItemsList = new List<MenuItem>();
+        private const int k_BackOrExit = 0;
 
-
-        public SubMenu(string i_Title, SubMenu i_Parent, int i_ItemIndex) : base(i_Title, i_Parent, i_ItemIndex)
-        {
-        }
+        public SubMenu(string i_Title, SubMenu i_Parent, int i_ItemIndex) : base(i_Title, i_Parent, i_ItemIndex) {}
 
         public int NumberOfItems
         {
             get
             {
-                return m_ItemsList.Count;
+                return r_ItemsList.Count;
             }
         }
 
         public void AddMenuItem(MenuItem i_Item)
         {
-            m_ItemsList.Add(i_Item);
+            r_ItemsList.Add(i_Item);
         }
 
         public override void ActivateItem()
         {
-            ConsoleUI.PrintMassage(bulidMenuFormat(), true);
-            int choise;
+            ConsoleMenu.PrintMessage(bulidMenuFormat().ToString(), true);
+            int choice;
+
             while (true)
             {
                 try
                 {
-                    choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
+                    choice = ConsoleMenu.GetChosenOptionFromUser(k_BackOrExit, NumberOfItems);
+                    break;
                 }
-                catch
+                catch (Exception exception)
                 {
+                    ConsoleMenu.PrintMessage(exception.Message);
                     continue;
                 }
-                break;
             }
 
-            if (choise == k_backOrExit)
+            performActionBasedOnValidatedChoice(choice);
+        }
+
+        private void performActionBasedOnValidatedChoice(int i_Choice)
+        {
+            bool Chosen = i_Choice == k_BackOrExit;
+            bool isMainMenu = Parent == null;
+
+            if (Chosen)
             {
-                if (Parent == null)
+                if (isMainMenu)
                 {
-                    ConsoleUI.EndProgram();
+                    ConsoleMenu.EndProgramMessage();
                 }
                 else
                 {
@@ -56,7 +64,7 @@ namespace Ex04.Menus.Delegate
             }
             else
             {
-                m_ItemsList[choise - 1].ActivateItem();
+                r_ItemsList[i_Choice - 1].ActivateItem();
             }
         }
 
@@ -64,18 +72,20 @@ namespace Ex04.Menus.Delegate
         {
             StringBuilder menuFormat = new StringBuilder();
 
-            menuFormat.AppendFormat($"{this.Title}:");
+            menuFormat.AppendFormat($"{Title}:");
             menuFormat.AppendLine();
             menuFormat.AppendLine("========================");
             menuFormat.AppendFormat($"Enter your choice between 0 to {NumberOfItems}");
             menuFormat.AppendLine();
-            foreach (MenuItem item in m_ItemsList)
+            foreach (MenuItem item in r_ItemsList)
             {
                 menuFormat.AppendFormat($"{item.Title}");
                 menuFormat.AppendLine();
             }
 
-            if (Parent == null)
+            bool isMainMenu = Parent == null;
+
+            if (isMainMenu)
             {
                 menuFormat.AppendLine("0. Exit");
             }
@@ -85,10 +95,8 @@ namespace Ex04.Menus.Delegate
             }
 
             menuFormat.Append("========================");
+
             return menuFormat;
         }
-
     }
 }
-
-

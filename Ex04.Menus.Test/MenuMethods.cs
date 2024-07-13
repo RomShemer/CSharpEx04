@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Ex04.Menus.Test
 {
@@ -11,16 +12,40 @@ namespace Ex04.Menus.Test
 
         public static void CountCapitals()
         {
-            Console.WriteLine("Please enter a sentence:");
-            string sentence = Console.ReadLine();
+            string sentence = getValidSentence();
             int capitalCount = 0;
 
-            foreach (char c in sentence)
+            foreach (char currentChar in sentence)
             {
-                if (char.IsUpper(c))
-                    capitalCount++;
+                if (char.IsUpper(currentChar))
+                {
+                    capitalCount += 1;
+                }
             }
+
             Console.WriteLine($"There are {capitalCount} capital letters");
+        }
+
+        private static string getValidSentence()
+        {
+            bool isValidInput;
+            string sentence;
+            string invalidInputMessage = string.Empty;
+
+            do
+            {
+                if (!string.IsNullOrEmpty(invalidInputMessage))
+                {
+                    Console.WriteLine(invalidInputMessage);
+                }
+
+                Console.WriteLine("Please enter a sentence:");
+                sentence = Console.ReadLine();
+                isValidInput = sentence.Any(char.IsLetter) && !string.IsNullOrWhiteSpace(sentence);
+                invalidInputMessage = "Invalid input, try again";
+            } while (!isValidInput);
+
+            return sentence;
         }
 
         public static void ShowCurrentTime()
