@@ -1,9 +1,4 @@
 ﻿using Ex04.Menus.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex04.Menus.Test
 {
@@ -18,7 +13,7 @@ namespace Ex04.Menus.Test
             r_MenuItem.AddItemMenuListener(this);
         }
 
-        void IMenuItemListener.ReportSelectedActionToListenerFromMenu()
+        void IMenuItemListener.ReportSelectedToListenerFromMenu()
         {
             MenuMethods.ShowCurrentDate();
         }

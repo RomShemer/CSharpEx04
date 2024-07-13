@@ -1,29 +1,21 @@
-﻿using B24_Ex04.Menus.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace Ex04.Menus.Interface
+﻿namespace Ex04.Menus.Interface
 {
     public class MainMenu
     {
-        private readonly MenuItem r_MenuItem; //change name maybe "MenuHead"?
+        private readonly MenuItem r_MenuItemHead;
         public MainMenu(string i_Title)
         {
-            r_MenuItem = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
+            r_MenuItemHead = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
         }
 
         public MenuItem AddANewMenuItemToMainMenu(string i_NewMenuItemTitle)
         {
-            return r_MenuItem.AddSubMenuItem(i_NewMenuItemTitle);
+            return r_MenuItemHead.AddSubMenuItem(i_NewMenuItemTitle);
         }
 
         public void Run()
         {
-            r_MenuItem.ActivateItem();
+            r_MenuItemHead.ActivateItem();
         }
     }
 }

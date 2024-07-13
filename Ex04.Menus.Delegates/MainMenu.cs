@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex04.Menus.Delegate
+﻿namespace Ex04.Menus.Delegate
 {
     public class MainMenu
     {
-        private readonly MenuItem r_MenuItem;
+        private readonly MenuItem r_MenuItemHead;
 
         public MainMenu(string i_Title)
         {
-            r_MenuItem = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
+            r_MenuItemHead = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
         }
 
         public MenuItem AddANewMenuItemToMainMenu(string i_NewMenuItemTitle)
         {
-            return r_MenuItem.AddMenuItem(i_NewMenuItemTitle);
+            return r_MenuItemHead.AddMenuItem(i_NewMenuItemTitle);
         }
 
         public void Run()
         {
-            r_MenuItem.ActivateItem();
+            r_MenuItemHead.ActivateItem();
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using B24_Ex04.Menus.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interface
 {
@@ -12,7 +10,7 @@ namespace Ex04.Menus.Interface
         private readonly string r_Title;
         private readonly MenuItem r_Parent;
         private List<IMenuItemListener> m_ItemMenuListenersList = new List<IMenuItemListener>();
-        private List<MenuItem> m_ItemsList = new List<MenuItem>();
+        private List<MenuItem> m_ItemsList = new List<MenuItem>(); //readonly?
         private const int k_backOrExit = 0;
         public const int k_mainMenu = -1;
 
@@ -67,7 +65,7 @@ namespace Ex04.Menus.Interface
         {
             foreach (IMenuItemListener listener in m_ItemMenuListenersList)
             {
-                listener.ReportSelectedActionToListenerFromMenu();
+                listener.ReportSelectedToListenerFromMenu();
             }
         }
 
@@ -86,8 +84,8 @@ namespace Ex04.Menus.Interface
 
         private void activateSubMenuItem()
         {
-            ConsoleUI.PrintMassage(bulidMenuFormat(), true);
-            int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
+            ConsoleUI.PrintMessage(bulidMenuFormat(), true);
+            int choise = ConsoleUI.GetChosenOptionFromUser(k_backOrExit, NumberOfItems);
 
             if (choise == k_backOrExit)
             {

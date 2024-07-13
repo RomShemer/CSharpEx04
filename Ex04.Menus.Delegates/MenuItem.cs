@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex04.Menus.Delegate
 {
@@ -10,14 +8,16 @@ namespace Ex04.Menus.Delegate
     {
         private readonly string r_Title;
         private readonly MenuItem r_Parent;
-        private List<MenuItem> m_ItemsList = new List<MenuItem>();
+        private List<MenuItem> m_ItemsList = new List<MenuItem>(); //readonly?
         public event Action Selected;
         private const int k_backOrExit = 0;
         public const int k_mainMenu = -1;
 
         public MenuItem(string i_Title, MenuItem i_Parent, int i_ItemIndex)
         {
-            if (i_ItemIndex == k_mainMenu)
+            bool isItemIsMainMenu = (i_ItemIndex == k_mainMenu);
+
+            if (isItemIsMainMenu)
             {
                 r_Title = i_Title;
             }
@@ -55,7 +55,9 @@ namespace Ex04.Menus.Delegate
 
         public void ActivateItem()
         {
-            if (NumberOfItems > 1)
+            bool isItemASubMenu = m_ItemsList.Count > 1;
+
+            if (isItemASubMenu)
             {
                 activateSubMenuItem();
             }
@@ -70,10 +72,13 @@ namespace Ex04.Menus.Delegate
         {
             ConsoleUI.PrintMassage(bulidMenuFormat(), true);
             int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
+            bool isExitOrBackWasChocen = choise == k_backOrExit;
 
-            if (choise == k_backOrExit)
+            if (isExitOrBackWasChocen)
             {
-                if (r_Parent == null)
+                bool isItemIsMainMenu = (r_Parent == null);
+
+                if (isItemIsMainMenu)
                 {
                     ConsoleUI.EndProgram();
                 }
@@ -126,6 +131,7 @@ namespace Ex04.Menus.Delegate
             }
 
             menuFormat.Append("========================");
+
             return menuFormat;
         }
     }

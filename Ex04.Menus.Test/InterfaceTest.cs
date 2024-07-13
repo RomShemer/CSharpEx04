@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ex04.Menus.Interface;
+﻿using Ex04.Menus.Interface;
 
 namespace Ex04.Menus.Test
 {
@@ -16,12 +11,14 @@ namespace Ex04.Menus.Test
             string varsionAndCapitalSubMenuItem = "Version And Capital";
 
             MainMenu interfaceMenu = new MainMenu(interfaceMenuTitle);
+            //creates and add the subMenu  
             MenuItem dateOrTimeSubMenu = interfaceMenu.AddANewMenuItemToMainMenu (dateSubMenuItem);
-            //add the subMenuItem to dateOrTime menu
+            //creates and add the actions of show time and date into dateOrTime subMenu
             ShowCurrentDate currentDate = new ShowCurrentDate(dateOrTimeSubMenu);
             ShowCurrentTime currentTime = new ShowCurrentTime(dateOrTimeSubMenu);
-            //add the subMenuItem to versionAndCountCapitals menu
+            //creates and add the subMenu  
             MenuItem versionAndCapitalsSubMenu = interfaceMenu.AddANewMenuItemToMainMenu(varsionAndCapitalSubMenuItem);
+            //creates and add the actions of show version and count capitals letter into versionAndCapitals subMenu
             ShowVersion version = new ShowVersion(versionAndCapitalsSubMenu);
             CountCapitals countCapitals = new CountCapitals(versionAndCapitalsSubMenu);
 
