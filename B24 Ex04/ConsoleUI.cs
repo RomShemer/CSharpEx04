@@ -37,17 +37,17 @@ namespace B24_Ex04.Menus.Interfaces
 			int choise;
 			bool isValidInput;
 
-			do
+			if(!int.TryParse(io_Input, out choise))
 			{
-				isValidInput = !int.TryParse(io_Input, out choise) || choise < i_LowerLimit || choise > i_HigherLimit;
-                StringBuilder errorMessage = new StringBuilder();
-                errorMessage.AppendFormat($"Please enter a integer number between {0} - {1}", i_LowerLimit, i_HigherLimit);
-				errorMessage.AppendLine();
-                PrintMessage(errorMessage);
-			}while (!isValidInput);
-			
+				throw new FormatException($"Please enter a integer number");
+			}
+			else if( choise < i_LowerLimit || choise > i_HigherLimit)
+			{
+				throw new ArgumentException($"Please enter a integer number between {i_LowerLimit} - {i_HigherLimit}");
+			}
 			return choise;
 		}
+
 		public static void EndProgram()
 		{
 			Console.Clear();

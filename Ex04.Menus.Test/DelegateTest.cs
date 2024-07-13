@@ -9,7 +9,7 @@ namespace Ex04.Menus.Test
             string delegateMenuTitle = "Delegate Main Menu";
             string dateSubMenuItem = "Show Date/Time";
             string varsionAndCapitalSubMenuItem = "Version And Capital";
-
+            //are we fine woth this spaces ?
             MainMenu delegateMenu = new MainMenu(delegateMenuTitle);
             //creates and add the subMenus
             MenuItem dateOrTimeMenu = delegateMenu.AddANewMenuItemToMainMenu(dateSubMenuItem);

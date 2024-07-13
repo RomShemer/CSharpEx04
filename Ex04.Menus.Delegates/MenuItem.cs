@@ -70,14 +70,27 @@ namespace Ex04.Menus.Delegate
 
         private void activateSubMenuItem()
         {
-            ConsoleUI.PrintMassage(bulidMenuFormat(), true);
-            int choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
-            bool isExitOrBackWasChocen = choise == k_backOrExit;
+            ConsoleUI.PrintMessage(bulidMenuFormat(), true);
+            int choise;
+
+            while (true)
+            {
+                try
+                {
+                    choise = ConsoleUI.GetChosenOptionfromUser(k_backOrExit, NumberOfItems);
+                }
+                catch
+                {
+                    continue;
+                }
+                break;
+            }
+
+            bool isExitOrBackWasChocen = choise == 0;
+            bool isItemIsMainMenu = (r_Parent == null);
 
             if (isExitOrBackWasChocen)
             {
-                bool isItemIsMainMenu = (r_Parent == null);
-
                 if (isItemIsMainMenu)
                 {
                     ConsoleUI.EndProgram();

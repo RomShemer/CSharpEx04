@@ -85,8 +85,20 @@ namespace Ex04.Menus.Interface
         private void activateSubMenuItem()
         {
             ConsoleUI.PrintMessage(bulidMenuFormat(), true);
-            int choise = ConsoleUI.GetChosenOptionFromUser(k_backOrExit, NumberOfItems);
-
+            int choise;
+            while (true)
+            {
+                try
+                {
+                    choise = ConsoleUI.GetChosenOptionFromUser(k_backOrExit, NumberOfItems);
+                }
+                catch
+                {
+                    continue;
+                }
+                break;
+            }
+          
             if (choise == k_backOrExit)
             {
                 if (r_Parent == null)
@@ -133,11 +145,11 @@ namespace Ex04.Menus.Interface
             return menuFormat;
         }
 
-        public void Selected()
+        public void Selected() //change name mabey actuvate leaf action or listner choose the name u think is best 
         {
-            Console.Clear();
+            ConsoleUI.PrintMessage("", true);
             NotifyMenuItemSelectedListeners();
-            Console.WriteLine("Press Enter to continue."); //console?
+            ConsoleUI.PrintMessage("Press Enter to continue");
             Console.ReadLine();
             r_Parent.ActivateItem();
         }

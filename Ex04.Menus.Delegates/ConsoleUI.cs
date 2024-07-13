@@ -32,24 +32,27 @@ namespace Ex04.Menus.Delegate
         private static int validateInput(string io_Input, int i_LowerLimit, int i_HigherLimit)
         {
             int choise;
-            bool isValidInput;
-
-            do
+            if (!int.TryParse(io_Input, out choise))
             {
-                isValidInput = !int.TryParse(io_Input, out choise) || choise < i_LowerLimit || choise > i_HigherLimit;
-                StringBuilder errorMessage = new StringBuilder();
-                errorMessage.AppendFormat($"Please enter a integer number between {0} - {1}", i_LowerLimit, i_HigherLimit);
-                errorMessage.AppendLine();
-                PrintMessage(errorMessage);
-            } while (!isValidInput);
-
+                throw new FormatException($"Please enter a intger number");
+            }
+            else if (choise < i_LowerLimit || choise > i_HigherLimit)
+            {
+                throw new ArgumentException($"Please enter a intger number between {i_LowerLimit} - {i_HigherLimit}");
+            }
             return choise;
         }
+
         public static void EndProgram()
         {
             Console.Clear();
             PrintMessage("Program activity ended. Goodbye", true);
 
+        }
+
+        internal static int GetChosenOptionfromUser(int k_backOrExit, int numberOfItems)
+        {
+            throw new NotImplementedException();
         }
     }
 }
