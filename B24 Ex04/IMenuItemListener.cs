@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex04.Menus.Interface
+﻿namespace Ex04.Menus.Interface
 {
     public interface IMenuItemListener
     {
-        void ReportSelectedToListenerFromMenu();//change name?
+        void ReportSelectedToListenerFromMenu();
     }
 }

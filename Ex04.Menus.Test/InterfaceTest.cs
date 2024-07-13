@@ -6,21 +6,19 @@ namespace Ex04.Menus.Test
     {
         public static MainMenu BuildInterfaceMainMenu()
         {
-            string interfaceMenuTitle = "Interface Main Menu";
-            string dateSubMenuItem = "Show Date/Time";
-            string varsionAndCapitalSubMenuItem = "Version And Capital";
-
-            MainMenu interfaceMenu = new MainMenu(interfaceMenuTitle);
-            //creates and add the subMenu  
-            MenuItem dateOrTimeSubMenu = interfaceMenu.AddANewMenuItemToMainMenu (dateSubMenuItem);
-            //creates and add the actions of show time and date into dateOrTime subMenu
-            ShowCurrentDate currentDate = new ShowCurrentDate(dateOrTimeSubMenu);
-            ShowCurrentTime currentTime = new ShowCurrentTime(dateOrTimeSubMenu);
-            //creates and add the subMenu  
-            MenuItem versionAndCapitalsSubMenu = interfaceMenu.AddANewMenuItemToMainMenu(varsionAndCapitalSubMenuItem);
-            //creates and add the actions of show version and count capitals letter into versionAndCapitals subMenu
-            ShowVersion version = new ShowVersion(versionAndCapitalsSubMenu);
-            CountCapitals countCapitals = new CountCapitals(versionAndCapitalsSubMenu);
+            MainMenu interfaceMenu = new MainMenu("Interface Main Menu");
+            //add Items to main menu
+            SubMenu dateSubMenu = new SubMenu("Show Date/Time", interfaceMenu.MainMenuItem, interfaceMenu.MainMenuItem.NumberOfItems + 1);
+            interfaceMenu.MainMenuItem.AddMenuItem(dateSubMenu);
+            SubMenu versionAndCapitalSubMenu = new SubMenu("Version And Capital", interfaceMenu.MainMenuItem, 
+                                                                  interfaceMenu.MainMenuItem.NumberOfItems + 1);
+            interfaceMenu.MainMenuItem.AddMenuItem(versionAndCapitalSubMenu);
+            //add the subMenuItem to dateOrTime menu
+            new ShowCurrentDate(dateSubMenu);
+            new ShowCurrentTime(dateSubMenu);
+            //add the subMenuItem to versionAndCountCapitals menu
+            new ShowVersion(versionAndCapitalSubMenu);
+            new CountCapitals(versionAndCapitalSubMenu);
 
             return interfaceMenu;
         }

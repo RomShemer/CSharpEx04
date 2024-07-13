@@ -2,21 +2,24 @@
 {
     public class MainMenu
     {
-        private readonly MenuItem r_MenuItemHead;
+        private readonly SubMenu r_MainMenuItem;
+
+        public SubMenu MainMenuItem
+        {
+            get
+            {
+                return r_MainMenuItem;
+            }
+        }
 
         public MainMenu(string i_Title)
         {
-            r_MenuItemHead = new MenuItem(i_Title, null, MenuItem.k_mainMenu);
+            r_MainMenuItem = new SubMenu(i_Title, null, MenuItem.k_MainMenuIndexKey);
         }
 
-        public MenuItem AddANewMenuItemToMainMenu(string i_NewMenuItemTitle)
+        public void RunMenu()
         {
-            return r_MenuItemHead.AddMenuItem(i_NewMenuItemTitle);
-        }
-
-        public void Run()
-        {
-            r_MenuItemHead.ActivateItem();
+            r_MainMenuItem.ActivateItem();
         }
     }
 }

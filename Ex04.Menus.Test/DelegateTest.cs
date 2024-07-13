@@ -2,50 +2,53 @@
 
 namespace Ex04.Menus.Test
 {
-    internal class DelegateTest
+    public class DelegateTest
     {
         public static MainMenu BuildDelegateMenu()
         {
-            string delegateMenuTitle = "Delegate Main Menu";
-            string dateSubMenuItem = "Show Date/Time";
-            string varsionAndCapitalSubMenuItem = "Version And Capital";
-            //are we fine woth this spaces ?
-            MainMenu delegateMenu = new MainMenu(delegateMenuTitle);
+            MainMenu delegateMenu = new MainMenu("Delegate Main Menu");
             //creates and add the subMenus
-            MenuItem dateOrTimeMenu = delegateMenu.AddANewMenuItemToMainMenu(dateSubMenuItem);
-            MenuItem versionAndCapitalMenu = delegateMenu.AddANewMenuItemToMainMenu(varsionAndCapitalSubMenuItem);
-            //creates and add the action of show date in the subMenu 
-            MenuItem showDate = dateOrTimeMenu.AddMenuItem("Show Date");
-            showDate.Selected += menuItemShowDate_Selected;
-            //creates and add the action of show time in the subMenu 
-            MenuItem showTime = dateOrTimeMenu.AddMenuItem("Show Time");
-            showTime.Selected += menuItemShowTime_Selected;
-            //creates and add the action of count capitals letter the subMenu 
-            MenuItem countCapitals = versionAndCapitalMenu.AddMenuItem("Count Capitals");
-            countCapitals.Selected += menuItemCountCapitals_Selected;
-            //creates and add the action of show version in the subMenu 
-            MenuItem showVersion = versionAndCapitalMenu.AddMenuItem("Show Version");
-            showVersion.Selected += menuItemShowVersion_Selected;
+            SubMenu dateOrTimeMenu = new SubMenu("Show Date/Time", delegateMenu.MainMenuItem, delegateMenu.MainMenuItem.NumberOfItems + 1);
+            delegateMenu.MainMenuItem.AddMenuItem(dateOrTimeMenu);
+            SubMenu versionAndCapitalMenu = new SubMenu("Version And Capital",  delegateMenu.MainMenuItem,
+                                                                delegateMenu.MainMenuItem.NumberOfItems + 1);
+            delegateMenu.MainMenuItem.AddMenuItem(versionAndCapitalMenu);
+            //creates and add the action of show date into the subMenu 
+            LeafAction showDate = new LeafAction("Show Date", dateOrTimeMenu, dateOrTimeMenu.NumberOfItems + 1);
+            dateOrTimeMenu.AddMenuItem(showDate);
+            showDate.Selected += DelegateTest.showDate;
+            //creates and add the action of show time into the subMenu 
+            LeafAction showTime = new LeafAction("Show Time", dateOrTimeMenu, dateOrTimeMenu.NumberOfItems + 1);
+            dateOrTimeMenu.AddMenuItem(showTime);
+            showTime.Selected += DelegateTest.showTime;
+            //creates and add the action of show version into the subMenu 
+            LeafAction showVersion = new LeafAction("Show Version", versionAndCapitalMenu, versionAndCapitalMenu.NumberOfItems + 1);
+            versionAndCapitalMenu.AddMenuItem(showVersion);
+            showVersion.Selected += DelegateTest.showVersion;
+            //creates and add the action of count capitals letter into the subMenu 
+            LeafAction countCapitals = new LeafAction("Count Capitals", versionAndCapitalMenu, versionAndCapitalMenu.NumberOfItems + 1);
+            versionAndCapitalMenu.AddMenuItem(countCapitals);
+            countCapitals.Selected += DelegateTest.countCapitals;
 
             return delegateMenu;
         }
 
-        private static void menuItemShowDate_Selected()
+        private static void showDate()
         {
             MenuMethods.ShowCurrentDate();
         }
 
-        private static void menuItemShowTime_Selected()
+        private static void showTime()
         {
             MenuMethods.ShowCurrentTime();
         }
 
-        private static void menuItemCountCapitals_Selected()
+        private static void countCapitals()
         {
             MenuMethods.CountCapitals();
         }
 
-        private static void menuItemShowVersion_Selected()
+        private static void showVersion()
         {
             MenuMethods.ShowVersion();
         }

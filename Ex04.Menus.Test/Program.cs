@@ -5,9 +5,9 @@
         static void Main()
         {
             Interface.MainMenu interfaceMenu = InterfaceTest.BuildInterfaceMainMenu();
-            interfaceMenu.Run();
+            interfaceMenu.RunMenu();
             Delegate.MainMenu delegateMenu = DelegateTest.BuildDelegateMenu();
-            delegateMenu.Run();
+            delegateMenu.RunMenu();
         }
     }
 }
